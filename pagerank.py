@@ -111,19 +111,15 @@ def sample_pagerank(corpus, damping_factor, n):
         ranks.update({site : 0})
 
     # Generate random number (0-1)
-    samples = []
-    hits = []
-
     count = 0
     while count < SAMPLES:
         sample = random()
-        samples.append(sample)
+
         for i in range(len(site_weight)):
             if site_weight[i][1] > sample:
                 if i == 0:
                     hit = site_weight[i][0]
                     ranks[hit] += 1
-                    hits.append(hit)
 
                     next_site = transition_model(corpus, hit, DAMPING)
                     x = 0
@@ -141,7 +137,6 @@ def sample_pagerank(corpus, damping_factor, n):
                     if sample > site_weight[i - 1][1]:
                         hit = site_weight[i][0]
                         ranks[hit] += 1
-                        hits.append(hit)
 
                         next_site = transition_model(corpus, hit, DAMPING)
                         x = 0
